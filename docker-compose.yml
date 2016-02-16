@@ -1,0 +1,26 @@
+web:
+  build: .
+  ports:
+    - "80:80"
+  links:
+    - db
+  volumes_from:
+    - data
+db:
+  image: aimakun/mysql
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_DATABASE: nameyourdb
+    MYSQL_ROOT_PASSWORD: provideyourpwd
+data:
+  image: busybox
+  volumes:
+    - .:/docker_data
+AptCacherNG:
+  image: sameersbn/apt-cacher-ng:latest
+  ports:
+    - "3142:3142"
+  volumes:
+    - /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng
+  restart: always
