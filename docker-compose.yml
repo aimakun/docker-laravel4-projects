@@ -17,10 +17,3 @@ data:
   image: busybox
   volumes:
     - .:/docker_data
-AptCacherNG:
-  image: sameersbn/apt-cacher-ng:latest
-  ports:
-    - "3142:3142"
-  volumes:
-    - /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng
-  restart: always

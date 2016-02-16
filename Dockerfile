@@ -5,10 +5,6 @@ COPY docker-vhosts.conf /etc/apache2/sites-enabled/000-default.conf
 # Set timezone
 RUN echo 'date.timezone = Asia/Bangkok' > /etc/php5/apache2/php.ini
 
-# Use apt-cacher-ng for fast rebuild
-RUN echo 'Acquire::HTTP::Proxy "http://172.17.42.1:3142";' >> /etc/apt/apt.conf.d/01proxy \
-        && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01proxy
-
 # Required extensions for this project
 RUN apt-get update && apt-get install -y \
         software-properties-common php5-mcrypt php-soap php5-intl \
