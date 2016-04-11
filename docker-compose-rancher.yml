@@ -1,0 +1,28 @@
+db:
+  ports:
+    - 3306:3306/tcp
+  environment:
+    # Setup DB information for database container.
+    MYSQL_DATABASE: dbname
+    MYSQL_PASSWORD: dbpwd
+    MYSQL_ROOT_PASSWORD: dbrootpwd
+    MYSQL_USER: dbuser
+  image: mysql
+data:
+  labels:
+    io.rancher.container.start_once: 'true'
+  image: busybox
+  volumes:
+    - /whatever/host/path:/data # Setup host path to link data with shared volume.
+web:
+  ports:
+  - whateverport:80/tcp # Setup available port, 80 for standalone, otherwise available port for nginx-proxy.
+  environment:
+    VIRTUAL_HOST: whatever.domain.local # VIRTUAL_HOST domain or subdomain name for nginx-proxy
+  labels:
+    io.rancher.sidekicks: data,db
+  image: aimakun/docker-laravel4-projects
+  links:
+    - db
+  volumes_from:
+    - data
