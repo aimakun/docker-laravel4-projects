@@ -1,6 +1,6 @@
 db:
   ports:
-    - 3306:3306/tcp
+    - 3306/tcp
   environment:
     # Setup DB information for database container.
     MYSQL_DATABASE: dbname
@@ -16,7 +16,7 @@ data:
     - /whatever/host/path:/data # Setup host path to link data with shared volume.
 web:
   ports:
-  - whateverport:80/tcp # Setup available port, 80 for standalone, otherwise available port for nginx-proxy.
+  - 80/tcp # Setup available port, 80 for standalone, otherwise available port for nginx-proxy.
   environment:
     VIRTUAL_HOST: whatever.domain.local # VIRTUAL_HOST domain or subdomain name for nginx-proxy
   labels:
