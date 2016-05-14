@@ -16,4 +16,4 @@ db:
 data:
   image: busybox
   volumes:
-    - .:/docker_data
+    - .:/data
