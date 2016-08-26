@@ -9,14 +9,11 @@ RUN echo 'date.timezone = Asia/Bangkok' > /etc/php5/apache2/php.ini
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         software-properties-common wget php5-mcrypt php-soap php5-intl \
         libcurl3 php5-curl gettext \
+        xvfb libxrender1 \
         && php5enmod mcrypt \
         && php5enmod soap
 
 # Install wkhtmltopdf
-RUN add-apt-repository ppa:ecometrica/servers \
-        && apt-get update \
-        && DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb
-
 RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
 		&& tar xf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
 		&& cp wkhtmltox/bin/wkhtmltopdf /usr/bin \
