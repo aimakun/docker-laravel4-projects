@@ -15,7 +15,14 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 # Install wkhtmltopdf
 RUN add-apt-repository ppa:ecometrica/servers \
         && apt-get update \
-        && DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb wkhtmltopdf
+        && DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb
+
+RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+		&& tar xf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+		&& cp wkhtmltox/bin/wkhtmltopdf /usr/bin \
+		&& cp wkhtmltox/bin/wkhtmltoimage /usr/bin \
+		&& rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+		&& rm -r wkhtmltox
 
 # Setup locale & timezone
 RUN locale-gen sv_SE.UTF-8
