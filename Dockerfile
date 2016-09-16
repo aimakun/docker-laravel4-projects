@@ -42,4 +42,7 @@ RUN usermod -G staff www-data
 # Setup cronjob for Indatus/dispatcher
 RUN crontab -l | { cat; echo "* * * * * cd /data && php artisan scheduled:run 1>> /dev/null 2>&1"; } | crontab -
 
+# Supervisor setup for queue process
+RUN supervisorctl restart
+
 RUN apache2 -D FOREGROUND &
