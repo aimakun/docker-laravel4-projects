@@ -43,6 +43,6 @@ RUN usermod -G staff www-data
 RUN crontab -l | { cat; echo "* * * * * cd /data && php artisan scheduled:run 1>> /dev/null 2>&1"; } | crontab -
 
 # Supervisor setup for queue process
-RUN supervisorctl restart
+ADD supervisor-laravel-queue.conf /etc/supervisor/conf.d/supervisord-laravel-queue.conf
 
-RUN apache2 -D FOREGROUND &
+CMD ["/run.sh"]
