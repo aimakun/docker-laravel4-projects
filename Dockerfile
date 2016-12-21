@@ -11,7 +11,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         libcurl3 php5-curl gettext \
         xvfb libxrender1 \
         && php5enmod mcrypt \
-        && php5enmod soap
+        && php5enmod soap \
+        && a2enmod headers
 
 # Install wkhtmltopdf
 RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
