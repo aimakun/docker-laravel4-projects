@@ -22,6 +22,9 @@ RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-
 		&& rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
 		&& rm -r wkhtmltox
 
+# Install PHP CodeSniffer
+RUN pear install PHP_CodeSniffer
+
 # Setup locale & timezone
 RUN locale-gen sv_SE.UTF-8
 RUN locale-gen en_US.UTF-8
