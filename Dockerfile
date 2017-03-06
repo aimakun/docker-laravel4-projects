@@ -34,6 +34,11 @@ RUN wget https://phar.phpunit.de/phpunit-old.phar
 RUN chmod +x phpunit-old.phar
 RUN mv phpunit-old.phar /usr/local/bin/phpunit
 
+# Install PHPMetrics
+RUN wget https://github.com/phpmetrics/PhpMetrics/raw/master/build/phpmetrics.phar
+RUN chmod +x phpmetrics.phar
+RUN mv phpmetrics.phar /usr/local/bin/phpmetrics
+
 # Set default volume for image
 # This would be overrided by docker-compose for updatable source code between development
 COPY . /data
