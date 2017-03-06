@@ -44,6 +44,7 @@ RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 RUN python get-pip.py
 RUN pip install --upgrade --user awscli
 RUN export PATH=~/.local/bin:$PATH
+RUN touch ~/.bash_profile
 RUN /bin/bash -c "source ~/.bash_profile"
 
 # Set default volume for image
