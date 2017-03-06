@@ -39,6 +39,13 @@ RUN wget https://github.com/phpmetrics/PhpMetrics/raw/master/build/phpmetrics.ph
 RUN chmod +x phpmetrics.phar
 RUN mv phpmetrics.phar /usr/local/bin/phpmetrics
 
+# Install aws-cli
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+RUN python get-pip.py
+RUN pip install --upgrade --user awscli
+RUN export PATH=~/.local/bin:$PATH
+RUN source ~/.bash_profile
+
 # Set default volume for image
 # This would be overrided by docker-compose for updatable source code between development
 COPY . /data
