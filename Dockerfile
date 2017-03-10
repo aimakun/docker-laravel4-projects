@@ -9,7 +9,7 @@ RUN echo 'date.timezone = Asia/Bangkok' > /etc/php5/apache2/php.ini
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         software-properties-common wget php5-mcrypt php-soap php5-intl \
         libcurl3 php5-curl gettext \
-        xvfb libxrender1 \
+        xvfb libxrender1 htop \
         && php5enmod mcrypt \
         && php5enmod soap \
         && a2enmod headers
