@@ -51,12 +51,12 @@ RUN set -x \
 	&& make -j"$(nproc)" \
 	&& make install \
 	&& make clean \
-    && echo "zend_extension=$(find /usr/lib/php5/20121212/ -name xdebug.so)" > /etc/php5/apache2/conf.d/10-xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
-    && echo "xdebug.remote_handler=dbgp" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
-    && echo "xdebug.remote_connect_back=1" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
-    && echo "xdebug.remote_port=9004" >> /etc/php5/apache2/conf.d/10-xdebug.ini
+    && echo "zend_extension=$(find /usr/lib/php5/20121212/ -name xdebug.so)" > /etc/php5/cli/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /etc/php5/cli/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /etc/php5/cli/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_connect_back=1" >> /etc/php5/cli/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /etc/php5/cli/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_port=9004" >> /etc/php5/cli/conf.d/10-xdebug.ini
 
 
 # Set default volume for image
