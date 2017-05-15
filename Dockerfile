@@ -7,7 +7,7 @@ RUN echo 'date.timezone = Asia/Bangkok' > /etc/php5/apache2/php.ini
 
 # Required extensions for this project
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        software-properties-common wget php5-mcrypt php-soap php5-intl \
+        software-properties-common wget php5-mcrypt php-soap php5-intl php5-dev \
         libcurl3 php5-curl gettext \
         xvfb libxrender1 htop \
         && php5enmod mcrypt \
@@ -33,6 +33,31 @@ RUN locale-gen en_US.UTF-8
 RUN wget https://phar.phpunit.de/phpunit-old.phar
 RUN chmod +x phpunit-old.phar
 RUN mv phpunit-old.phar /usr/local/bin/phpunit
+
+# Setup the Xdebug version to install
+ENV XDEBUG_VERSION 2.2.7
+ENV XDEBUG_MD5 71a6b75885207e79762e1e7aaf5c3993
+
+# Install Xdebug
+RUN set -x \
+	&& curl -SL "http://www.xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz" -o xdebug.tgz \
+	&& echo $XDEBUG_MD5 xdebug.tgz | md5sum -c - \
+	&& mkdir -p /usr/src/xdebug \
+	&& tar -xf xdebug.tgz -C /usr/src/xdebug --strip-components=1 \
+	&& rm xdebug.* \
+	&& cd /usr/src/xdebug \
+	&& phpize \
+	&& ./configure \
+	&& make -j"$(nproc)" \
+	&& make install \
+	&& make clean \
+    && echo "zend_extension=$(find /usr/lib/php5/20121212/ -name xdebug.so)" > /etc/php5/apache2/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_connect_back=1" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /etc/php5/apache2/conf.d/10-xdebug.ini \
+    && echo "xdebug.remote_port=9004" >> /etc/php5/apache2/conf.d/10-xdebug.ini
+
 
 # Set default volume for image
 # This would be overrided by docker-compose for updatable source code between development
