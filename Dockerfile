@@ -10,9 +10,12 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         software-properties-common wget php5-mcrypt php-soap php5-intl php5-dev \
         libcurl3 php5-curl gettext \
         xvfb libxrender1 htop \
-        && php5enmod mcrypt \
+        php5-xsl imagemagick php5-imagick \
+    	&& php5enmod mcrypt \
         && php5enmod soap \
-        && a2enmod headers
+        && a2enmod headers \
+        && php5enmod xsl
+
 
 # Install wkhtmltopdf
 RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
