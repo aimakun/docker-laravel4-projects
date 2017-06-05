@@ -15,11 +15,11 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         && a2enmod headers
 
 # Install wkhtmltopdf
-RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
-		&& tar xf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+RUN wget https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+		&& tar xf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
 		&& cp wkhtmltox/bin/wkhtmltopdf /usr/bin \
 		&& cp wkhtmltox/bin/wkhtmltoimage /usr/bin \
-		&& rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+		&& rm wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
 		&& rm -r wkhtmltox
 
 # Install PHP CodeSniffer
